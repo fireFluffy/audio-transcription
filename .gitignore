@@ -1,5 +1,6 @@
 /node_modules/
 /typings/
+/server/node_modules/
 
 /coverage/
 /logs/

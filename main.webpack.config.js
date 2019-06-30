@@ -63,6 +63,20 @@ module.exports = {
       },
 
       {
+        test: /\.(mp3|wav)$/i,
+        loader: 'file-loader',
+        options: {
+          name() {
+            if (process.env.NODE_ENV === 'development') {
+              return '[path][name].[ext]';
+            }
+
+            return 'assets/[hash].[ext]';
+          },
+        },
+      },
+
+      {
         include: /[/\\]icons[/\\]/,
         loader: 'svg-react-loader',
         test: /\.svg$/,

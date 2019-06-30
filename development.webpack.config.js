@@ -30,6 +30,7 @@ const devConfig = {
     watchContentBase: true,
     open: 'google-chrome',
     stats: 'errors-only',
+    clientLogLevel: 'silent',
     publicPath: '/',
   },
 
