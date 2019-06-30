@@ -1,0 +1,16 @@
+{
+  "presets": [
+    "@babel/preset-react",
+    "@babel/preset-typescript",
+    "@babel/preset-env",
+  ],
+  "plugins": [
+    "react-hot-loader/babel",
+    ["import", { "libraryName": "antd", "libraryDirectory": "es", "style": "css" }],
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-proposal-export-default-from",
+    "@babel/plugin-proposal-optional-chaining",
+    "@babel/plugin-proposal-unicode-property-regex",
+    "@babel/plugin-transform-runtime"
+  ]
+}

@@ -1,0 +1,53 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": "./tsconfig.json",
+    "ecmaVersion": 7,
+    "sourceType": "module",
+    "useJSXTextNode": true,
+    "ecmaFeatures": {
+        "jsx": true
+    }
+  },
+  "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "eslint:recommended",
+    "airbnb",
+    "prettier",
+    "prettier/@typescript-eslint",
+    "prettier/react",
+    "plugin:react/recommended",
+    "plugin:compat/recommended",
+    "plugin:lodash/canonical",
+    "plugin:import/errors",
+    "plugin:import/warnings",
+    "plugin:jsx-a11y/recommended",
+    "plugin:promise/recommended",
+    "plugin:prettier/recommended"
+  ],
+  "plugins": [
+    "@typescript-eslint",
+    "react",
+    "jsx-a11y",
+    "promise",
+    "lodash",
+    "optimize-regex",
+    "no-loops"
+  ],
+  "rules": {
+    "prettier/prettier": "error",
+    "no-loops/no-loops": 2,
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx", "ts", "tsx"] }]
+  },
+  "settings": {
+    "import/resolver": "webpack",
+    "react": {
+      "version": "16.8"
+    }
+  },
+  "env": {
+    "es6": true,
+    "browser": true,
+    "node": true
+  }
+}

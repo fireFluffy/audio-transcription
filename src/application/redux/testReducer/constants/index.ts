@@ -1,0 +1,3 @@
+const TEST_CONSTANT = 'TEST_CONSTANT';
+
+export default TEST_CONSTANT;
