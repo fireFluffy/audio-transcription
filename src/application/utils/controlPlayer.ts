@@ -83,7 +83,6 @@ class ControlPlayer {
   public setStartPlay = (): void => {
     this.currentTime = this.getCurrentTime();
     this.startPlayDate = new Date() / 1000;
-    // this.finishPlayDate = 0;
   };
 
   public setFinishPlay = (): void => {
@@ -99,13 +98,22 @@ class ControlPlayer {
   };
 
   // Возвращает кол-во миллисекнд, которые нужно проиграть до полной секунды после остановки трэка
-  public getRestPlay = (): number => {
+  public getRestPlay = (step = 1000): number => {
     const getFinishTime = this.getFinishTime();
-    const quant = 10 ** 3;
+    const quant = step;
     const drob = +getFinishTime.toFixed(4);
     const result = quant - ~~((drob % 1) * quant);
 
     return result;
+  };
+
+  // Перемотка
+  public rewind = (percent: number = 0): number => {
+    const { duration } = this.buffer;
+    const newCurrent = (duration / 100) * percent;
+    this.currentTime = newCurrent;
+
+    return newCurrent;
   };
 }
 
