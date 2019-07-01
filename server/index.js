@@ -5,10 +5,13 @@ const path = require('path');
 const host = '127.0.0.1';
 const port = 3235;
 
+const file1 = 'assets/white_ship.wav';
+const file2 = 'assets/audio.wav';
+
 const requestHandler = (request, response) => {
   console.log(request.url);
   if (request.method === 'GET' && request.url === '/track') {
-    const filePath = path.join(__dirname, 'assets/white_ship.wav');
+    const filePath = path.join(__dirname, file2);
     console.log(filePath);
     const stat = fs.statSync(filePath);
 

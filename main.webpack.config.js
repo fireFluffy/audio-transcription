@@ -15,17 +15,17 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.tsx?$/,
+        test: /\.(ts|js)x?$/,
         exclude: /node_modules/,
         use: ['babel-loader'],
       },
 
-      {
-        test: /\.jsx?$/i,
-        exclude: /node_modules/,
-        use: ['source-map-loader'],
-        enforce: 'pre',
-      },
+      // {
+      //   test: /\.jsx?$/i,
+      //   exclude: /node_modules/,
+      //   use: ['source-map-loader'],
+      //   enforce: 'pre',
+      // },
 
       {
         test: /\.less$/,
@@ -76,11 +76,11 @@ module.exports = {
         },
       },
 
-      {
-        include: /[/\\]icons[/\\]/,
-        loader: 'svg-react-loader',
-        test: /\.svg$/,
-      },
+      // {
+      //   include: /[/\\]icons[/\\]/,
+      //   loader: 'svg-react-loader',
+      //   test: /\.svg$/,
+      // },
     ],
   },
 

@@ -48,23 +48,23 @@ const devConfig = {
         ],
       },
 
-      {
-        test: /\.jsx?$/i,
-        enforce: 'pre',
-        exclude: /node_modules/,
-        use: [
-          {
-            loader: 'eslint-loader',
-            options: {
-              emitError: true,
-              emitWarning: true,
-              failOnWarning: false,
-              failOnError: false,
-              outputReport: false,
-            },
-          },
-        ],
-      },
+      // {
+      //   test: /\.jsx?$/i,
+      //   enforce: 'pre',
+      //   exclude: /node_modules/,
+      //   use: [
+      //     {
+      //       loader: 'eslint-loader',
+      //       options: {
+      //         emitError: true,
+      //         emitWarning: true,
+      //         failOnWarning: false,
+      //         failOnError: false,
+      //         outputReport: false,
+      //       },
+      //     },
+      //   ],
+      // },
     ],
   },
 

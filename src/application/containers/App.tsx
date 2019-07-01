@@ -4,14 +4,14 @@ import * as React from 'react';
 import { BrowserRouter as Router } from 'react-router-dom';
 import styled from 'styled-components';
 // Containers
-import Player from './Player';
+import PageContainer from './Page';
 
 function App(): React.SFC {
   return (
     <Router>
       <MainWrap>
         <MainWrapIn>
-          <Player />
+          <PageContainer />
         </MainWrapIn>
       </MainWrap>
     </Router>
