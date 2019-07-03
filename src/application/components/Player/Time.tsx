@@ -92,10 +92,11 @@ export default TimeComponent;
 
 const MainWrap = styled.div`
   display: flex;
-  margin-left: -5px;
+  margin-left: -2px;
+  color: #8494a6;
 
   & > * {
-    margin-left: 5px;
+    margin-left: 2px;
   }
 
   user-select: none;

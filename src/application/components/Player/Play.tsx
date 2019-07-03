@@ -29,7 +29,7 @@ const MainWrap = styled.div`
       : `
     8px 0 0 10px
   `}
-  background-color: blue;
+  background-color: #3373eb;
   cursor: pointer;
   user-select: none;
 `;

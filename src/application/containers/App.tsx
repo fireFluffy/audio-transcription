@@ -24,6 +24,6 @@ const MainWrap = styled.div``;
 
 const MainWrapIn = styled.div`
   margin: 0 auto;
-  padding: 50px 0;
-  max-width: 500px;
+  padding: 84px 0 45px 0;
+  max-width: 805px;
 `;

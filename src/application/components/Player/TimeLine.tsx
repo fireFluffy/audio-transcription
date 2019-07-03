@@ -92,25 +92,25 @@ const MainWrap = styled.div`
 `;
 
 const MainLine = styled.div`
-  background-color: #e7e7e7;
-  height: 2px;
+  background-color: #e8e8e8;
+  height: 4px;
   display: flex;
   cursor: pointer;
 `;
 
 const BehindLine = styled.div`
   width: 0;
-  height: 2px;
-  background-color: blue;
+  height: 4px;
+  background-color: #3373eb;
   cursor: pointer;
 `;
 
 const Point = styled.div`
-  width: 10px;
-  height: 10px;
+  width: 13px;
+  height: 13px;
   position: relative;
   top: -4px;
-  background-color: blue;
+  background-color: #3373eb;
   border-radius: 50%;
   cursor: pointer;
 `;

@@ -1,5 +1,6 @@
 // Modules
 import * as React from 'react';
+import styled from 'styled-components';
 import _ from 'lodash';
 // Components
 import PostComponent from '../components/Test/Post';
@@ -31,8 +32,8 @@ class TextPageContainer extends React.PureComponent<{}, {}> {
     
     this.logic = new ControlTimeLine(this.templateEndpoints, this.templateTimeLine, this.setActiveWord);
 
-    // console.log(this.file);
-    console.log(this.templateEndpoints);
+    console.log(this.file);
+    // console.log(this.templateEndpoints);
     // console.log(this.templateTimeLine);
     // console.log(this.strText);
     // console.log(this.renderList);
@@ -53,6 +54,7 @@ class TextPageContainer extends React.PureComponent<{}, {}> {
     }
   }
 
+  // Формирование новых шаблонов при прокрутке
   public reTransform = () => {
     const { context } = this.props;
     const currentTime = context.getForTextTime();
@@ -71,8 +73,6 @@ class TextPageContainer extends React.PureComponent<{}, {}> {
 
     delete this.logic;
     this.logic = new ControlTimeLine(newEndpoints, newTimeLine, this.setActiveWord);
-
-    console.log(newEndpoints);
 
     this.logic.play();
   }
@@ -149,11 +149,14 @@ class TextPageContainer extends React.PureComponent<{}, {}> {
 
   public renderPost = (item, index): void => {
     const { activeWordId } = this.state;
+    const file = this.file[index];
+    const { timeStart } = file;
 
     return (
       <PostComponent
+        key={timeStart}
         activeWordId={activeWordId}
-        key={index}
+        timeStart={timeStart}
         row={item}
       />
     );
@@ -161,7 +164,13 @@ class TextPageContainer extends React.PureComponent<{}, {}> {
 
   private render(): React.SFC {
     const { activeWordId } = this.state;
-    return this.renderList.map(this.renderPost);
+    return (
+      <MainWrap>
+        <Title>Пример звонка.wav</Title>
+        <DateWrap>21 мар 18:03:41</DateWrap>
+        {this.renderList.map(this.renderPost)}
+      </MainWrap>
+    );
   }
 }
 
@@ -170,3 +179,23 @@ export default React.forwardRef((props, ref) => (
     {context => <TextPageContainer {...props} context={context} ref={ref} />}
   </ConsumerPage>
 ));
+
+const MainWrap = styled.div`
+  padding: 34px;
+  border-radius: 4px;
+  box-shadow: 0px 0px 10px 0px rgba(0,0,0,0.15);
+  background-color: #fff;
+`;
+
+const Title = styled.div`
+  font-size: 24px;
+  color: #05294b;
+`;
+
+const DateWrap = styled.div`
+  margin: 0 0 31px 0;
+  padding: 10px 0;
+  color: #8494a6;
+  font-size: 15px;
+  border-bottom: solid 1px #eff0f2;
+`;
