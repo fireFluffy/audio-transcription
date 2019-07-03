@@ -28,9 +28,9 @@ class ControlTimeLine {
       this.recursivePlay();
       this.cb(id);
 
-      if (silence && sayTime > 0.6) {
-        this.silenceId = setInterval(this.cb, sayTime * 1000);
-      }
+      // if (silence && sayTime > 0.01) {
+      //   this.silenceId = setInterval(this.cb, sayTime * 1000);
+      // }
     }, this.timeLine[ms]);
   };
 }
