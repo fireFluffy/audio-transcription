@@ -1,6 +1,7 @@
 class ControlTimeLine {
   private constructor(endpoints, timeLine, cb) {
     this.timeId = null;
+    this.silenceId = null;
     this.index = 0;
 
     this.endpoints = endpoints;
@@ -14,23 +15,22 @@ class ControlTimeLine {
   };
 
   public pause = (): void => {
-    clearInterval(this.timeId);
+    Promise.all([clearInterval(this.timeId), clearInterval(this.silenceId)]);
   };
 
   public recursivePlay = (): void => {
     const ms = this.index;
 
     this.timeId = setTimeout((): void => {
-      const { id, sayTime } = this.endpoints[this.keysEndpoints[this.index]];
+      const { id, sayTime, silence } = this.endpoints[this.keysEndpoints[this.index]];
 
       this.index += 1;
       this.recursivePlay();
       this.cb(id);
 
-      // console.log(silence);
-      // if (silence && silence > 5) {
-      //   setInterval(this.cb, sayTime);
-      // }
+      if (silence && sayTime > 0.6) {
+        this.silenceId = setInterval(this.cb, sayTime * 1000);
+      }
     }, this.timeLine[ms]);
   };
 }

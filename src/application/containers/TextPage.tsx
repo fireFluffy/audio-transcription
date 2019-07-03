@@ -25,13 +25,15 @@ class TextPageContainer extends React.PureComponent<{}, {}> {
     this.file = files.jsonFile;
     this.strText = this.file.length;
     this.templateEndpoints = this.createTemplateObject(this.file);
+    this.keysTemplateEndpoints = Object.keys(this.templateEndpoints);
     this.templateTimeLine =  this.createTemplateTimelineList(this.templateEndpoints);
     this.renderList = this.createRenderList(this.templateEndpoints, this.strText);
     
     this.logic = new ControlTimeLine(this.templateEndpoints, this.templateTimeLine, this.setActiveWord);
 
+    // console.log(this.file);
     console.log(this.templateEndpoints);
-    console.log(this.templateTimeLine);
+    // console.log(this.templateTimeLine);
     // console.log(this.strText);
     // console.log(this.renderList);
 
@@ -47,8 +49,32 @@ class TextPageContainer extends React.PureComponent<{}, {}> {
     if (prevProps.context.playing && !playing) {
       this.logic.pause();
     } else if (!prevProps.context.playing && playing) {
-      this.logic.play();
+      this.reTransform();
     }
+  }
+
+  public reTransform = () => {
+    const { context } = this.props;
+    const currentTime = context.getForTextTime();
+    const value = this.keysTemplateEndpoints.find((item, index) => item > currentTime);
+    const index = this.keysTemplateEndpoints.indexOf(value);
+    
+    const newKeys = this.keysTemplateEndpoints.slice(index);
+    const newEndpoints = {};
+    newKeys.forEach(i => {
+      newEndpoints[i] = {...this.templateEndpoints[i]};
+    });
+    const firstKey = this.keysTemplateEndpoints[index];
+    const newFirstKey = (+firstKey - currentTime).toFixed(2);
+    const newTimeLine = this.templateTimeLine.slice(index);
+    newTimeLine[0] = +newFirstKey * MS;
+
+    delete this.logic;
+    this.logic = new ControlTimeLine(newEndpoints, newTimeLine, this.setActiveWord);
+
+    console.log(newEndpoints);
+
+    this.logic.play();
   }
 
   // Создание шаблона транскрибации
@@ -58,6 +84,8 @@ class TextPageContainer extends React.PureComponent<{}, {}> {
     file.forEach(({ words }, indexRow): [] => {
       const objWords = words.reduce((obj, item, index): void => {
         const sayTime = +((item.timeEnd - item.timeStart).toFixed(2));
+        const startSay = words[index + 1] ? words[index + 1].timeStart : file[indexRow + 1]?.words[0].timeStart || 0;
+        const silence = +(startSay - item.timeEnd).toFixed(2);
 
         return {
           ...obj,
@@ -67,6 +95,7 @@ class TextPageContainer extends React.PureComponent<{}, {}> {
             word: item.word,
             finish: item.timeEnd,
             sayTime,
+            silence,
           },
         };
       }, {});
@@ -80,14 +109,11 @@ class TextPageContainer extends React.PureComponent<{}, {}> {
   // Создание шаблона интервалов транскрибации
   public createTemplateTimelineList = (endpoints): void => {
     const keysEndpointsList = Object.keys(endpoints);
-    const currentTime = 0;
 
     const list = keysEndpointsList.map((time, index): void => {
       const timeSay = +((+endpoints[time]?.finish - +time).toFixed(2));
       const timeSilence = +((+keysEndpointsList[index + 1] - +endpoints[time]?.finish).toFixed(2));
       const all = +(+(timeSay + timeSilence) * MS).toFixed();
-      
-      // console.log({ word: endpoints[time].word, timeSilence,  timeSay, all });
 
       return all;
     });

@@ -115,6 +115,10 @@ class ControlPlayer {
 
     return newCurrent;
   };
+
+  public getForTextTime = (): void => {
+    return +this.currentTime.toFixed(2);
+  };
 }
 
 export default ControlPlayer;

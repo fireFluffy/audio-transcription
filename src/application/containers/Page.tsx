@@ -62,6 +62,7 @@ class PageContainer extends React.PureComponent<{}, {}> {
       getRestPlay: this.player.getRestPlay,
       getDuration: this.getDuration,
       getCurrentTime: this.player.getCurrentTime,
+      getForTextTime: this.player.getForTextTime,
       rewind: this.player.rewind,
       togglePlay: this.togglePlay,
       playing,
