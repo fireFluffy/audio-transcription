@@ -48,7 +48,7 @@ const TimeStartWrap = styled.div`
 const Wrap = styled.span``;
 
 const WordWrap = styled.span`
-  background-color: ${({ isActiveId }) => (isActiveId ? `#9cc2ff` : `none`)};
+  background-color: ${({ isActiveId }) => (isActiveId ? `#dae7ff` : `inherit`)};
 `;
 
 const PostWrap = styled.div`
