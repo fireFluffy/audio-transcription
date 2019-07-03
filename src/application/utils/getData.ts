@@ -14,12 +14,7 @@ const getData = {
     const request = new XMLHttpRequest();
     request.open(METHOD, URL, true);
     request.responseType = RESPONSE_TYPE;
-    request.onreadystatechange = (): void => {
-      if (request.readyState === 4 && request.status === 200) {
-        cb(request.response);
-      }
-    };
-    // request.onload = () => cb(request.response);
+    request.onload = (): void => cb(request.response);
     request.onerror = onError;
     request.send(null);
   },

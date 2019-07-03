@@ -13,33 +13,64 @@ class PlayerComponent extends React.PureComponent<{}, {}> {
     playing: false,
   };
 
+  public state = {
+    keyTime: 0,
+  };
+
+  public updateKeyTime = (): void => {
+    const { keyTime } = this.state;
+    this.setState({ keyTime: keyTime + 1 });
+  };
+
   private render(): React.SFC {
+    const { keyTime } = this.state;
+
     return (
       <ConsumerPage>
         {(context): void => {
-          const { getDuration, getRestPlay, togglePlay, duration } = context;
+          const {
+            getDuration,
+            getRestPlay,
+            getCurrentTime,
+            rewind,
+            togglePlay,
+            duration,
+          } = context;
           const playing = context.playing || this.props.playing;
 
-          return (
-            <MainWrap>
-              <MainWrapIn>
-                <PlayButtonWrap>
-                  <PlayButtonComponent togglePlay={togglePlay} playing={playing} />
-                </PlayButtonWrap>
-                <TimeLineWrap>
-                  <TimeLineComponent duration={duration} playing={playing} />
-                </TimeLineWrap>
-                <TimeWrap>
-                  <TimeComponent
-                    duration={duration}
-                    getDuration={getDuration}
-                    getRestPlay={getRestPlay}
-                    playing={playing}
-                  />
-                </TimeWrap>
-              </MainWrapIn>
-            </MainWrap>
-          );
+          if (duration) {
+            return (
+              <MainWrap>
+                <MainWrapIn>
+                  <PlayButtonWrap>
+                    <PlayButtonComponent togglePlay={togglePlay} playing={playing} />
+                  </PlayButtonWrap>
+                  <TimeLineWrap>
+                    <TimeLineComponent
+                      duration={duration}
+                      getRestPlay={getRestPlay}
+                      playing={playing}
+                      rewind={rewind}
+                      togglePlay={togglePlay}
+                      updateKeyTime={this.updateKeyTime}
+                    />
+                  </TimeLineWrap>
+                  <TimeWrap>
+                    <TimeComponent
+                      update={keyTime}
+                      duration={duration}
+                      getCurrentTime={getCurrentTime}
+                      getDuration={getDuration}
+                      getRestPlay={getRestPlay}
+                      playing={playing}
+                    />
+                  </TimeWrap>
+                </MainWrapIn>
+              </MainWrap>
+            );
+          }
+
+          return null;
         }}
       </ConsumerPage>
     );
@@ -50,8 +81,11 @@ export default PlayerComponent;
 
 const MainWrap = styled.div`
   overflow: hidden;
-  border: solid 1px #e7e7e7;
-  margin: 20px 0;
+  background-color: #fff;
+  border-radius: 4px;
+  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.15);
+  margin: 42px auto 0 auto;
+  max-width: 737px;
 `;
 
 const MainWrapIn = styled.div`

@@ -11,12 +11,16 @@ class TimeComponent extends React.PureComponent<{}, {}> {
     this.timeId = null;
     this.intervalId = null;
     this.state = {
-      currentTime: { minutes: 0, seconds: 0 },
+      currentTime: this.getNewTime(),
     };
   }
 
   private componentDidUpdate(prevProps): void {
-    const { playing } = this.props;
+    const { playing, update } = this.props;
+
+    if (!_.isNil(update) && update !== prevProps.update) {
+      this.updateNewTime();
+    }
 
     if (playing && !prevProps.playing) {
       this.startUpdateCurrentTime();
@@ -24,6 +28,19 @@ class TimeComponent extends React.PureComponent<{}, {}> {
       this.stopUpdateCurrentTime();
     }
   }
+
+  public updateNewTime = (): void => {
+    this.setState({ currentTime: this.getNewTime() });
+  };
+
+  public getNewTime = (): void => {
+    const { getCurrentTime } = this.props;
+    const time = getCurrentTime();
+    const minutes = time > 60 ? +(time / 60).toFixed() : 0;
+    const seconds = +(time - minutes * 60).toFixed();
+
+    return { minutes, seconds };
+  };
 
   public updateCurrentTime = (): void => {
     const { currentTime } = this.state;
@@ -75,10 +92,11 @@ export default TimeComponent;
 
 const MainWrap = styled.div`
   display: flex;
-  margin-left: -5px;
+  margin-left: -2px;
+  color: #8494a6;
 
   & > * {
-    margin-left: 5px;
+    margin-left: 2px;
   }
 
   user-select: none;

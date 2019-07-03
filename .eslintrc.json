@@ -18,7 +18,6 @@
     "prettier/react",
     "plugin:react/recommended",
     "plugin:compat/recommended",
-    "plugin:lodash/canonical",
     "plugin:import/errors",
     "plugin:import/warnings",
     "plugin:jsx-a11y/recommended",

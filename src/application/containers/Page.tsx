@@ -2,6 +2,8 @@
 import * as React from 'react';
 import styled from 'styled-components';
 import _ from 'lodash';
+// Containers
+import TextPageContainer from './TextPage';
 // Components
 import PlayerContainer from './Player';
 // Utils
@@ -21,8 +23,6 @@ class PageContainer extends React.PureComponent<{}, {}> {
       ready: false,
       // Статус воспроизведения
       playing: false,
-      // Other
-      value: 50,
     };
 
     this.player = new ControlPlayer();
@@ -35,10 +35,6 @@ class PageContainer extends React.PureComponent<{}, {}> {
 
   public setPlaying = (playing): void => {
     this.setState({ playing });
-  };
-
-  public changeValue = (e): void => {
-    this.setState({ value: e.target.value });
   };
 
   public togglePlay = (): void => {
@@ -60,19 +56,22 @@ class PageContainer extends React.PureComponent<{}, {}> {
   };
 
   public render(): React.SFC {
-    const { duration, playing, value } = this.state;
+    const { duration, playing } = this.state;
     const pageApi = {
       duration,
       getRestPlay: this.player.getRestPlay,
       getDuration: this.getDuration,
+      getCurrentTime: this.player.getCurrentTime,
+      getForTextTime: this.player.getForTextTime,
+      rewind: this.player.rewind,
       togglePlay: this.togglePlay,
       playing,
     };
 
     return (
       <MainWrap>
-        <input type="number" min={0} max={200} onChange={this.changeValue} value={value} />
         <Provider value={pageApi}>
+          <TextPageContainer />
           <PlayerContainer />
         </Provider>
       </MainWrap>
