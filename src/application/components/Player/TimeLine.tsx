@@ -49,6 +49,7 @@ class TimeLineComponent extends React.PureComponent<{}, {}> {
   };
 
   public onClick = (e): void => {
+    e.stopPropagation();
     const _this = this;
     const { playing, rewind, togglePlay, updateKeyTime } = this.props;
     const isPlaying = playing;
@@ -57,7 +58,9 @@ class TimeLineComponent extends React.PureComponent<{}, {}> {
       togglePlay();
     }
 
-    const percent = (e.nativeEvent.offsetX / this.timeLineRef.current.clientWidth) * 100;
+    const clientOffset = e.nativeEvent.offsetX;
+    const timeLineWidth = +this.timeLineRef.current.offsetWidth.toFixed();
+    const percent = (clientOffset / timeLineWidth) * 100;
     rewind(percent);
 
     this.setState({ percentTimeLine: percent }, (): void => {

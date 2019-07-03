@@ -1,3 +1,3 @@
-import icons from '../resources';
+import icons, { files } from '../resources';
 
-export { icons };
+export { icons, files };

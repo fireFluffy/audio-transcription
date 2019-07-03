@@ -1,5 +1,6 @@
 import play from './img/play.svg';
 import pause from './img/pause.svg';
+import jsonFile from './json/transcript.json';
 
 const icons = {
   play,
@@ -7,3 +8,7 @@ const icons = {
 };
 
 export default icons;
+
+export const files = {
+  jsonFile,
+};
