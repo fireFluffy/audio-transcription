@@ -49,8 +49,6 @@ class TimeLineComponent extends React.PureComponent<{}, {}> {
   };
 
   public onClick = (e): void => {
-    e.stopPropagation();
-    const _this = this;
     const { playing, rewind, togglePlay, updateKeyTime } = this.props;
     const isPlaying = playing;
 

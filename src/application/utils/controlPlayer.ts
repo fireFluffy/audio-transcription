@@ -97,7 +97,7 @@ class ControlPlayer {
     return this.finishPlayDate;
   };
 
-  // Возвращает кол-во миллисекнд, которые нужно проиграть до полной секунды после остановки трэка
+  // Возвращает кол-во миллисекунд, которые нужно проиграть до полной секунды после остановки трэка
   public getRestPlay = (step = 1000): number => {
     const getFinishTime = this.getFinishTime();
     const quant = step;

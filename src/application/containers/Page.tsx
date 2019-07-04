@@ -19,14 +19,12 @@ class PageContainer extends React.PureComponent<{}, {}> {
     this.state = {
       // Продолжительность трэка
       duration: null,
-      // Статус загрузки трэка
-      ready: false,
       // Статус воспроизведения
       playing: false,
     };
 
     this.player = new ControlPlayer();
-    Promise.all([this.player.getMusic(this.setTrackInfo)]).catch((err): void => console.log(err));
+    this.player.getMusic(this.setTrackInfo);
   }
 
   public setTrackInfo = ({ duration }): void => {
