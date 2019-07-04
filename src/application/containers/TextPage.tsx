@@ -32,7 +32,7 @@ class TextPageContainer extends React.PureComponent<{}, {}> {
     
     this.logic = new ControlTimeLine(this.templateEndpoints, this.templateTimeLine, this.setActiveWord);
 
-    console.log(this.file);
+    // console.log(this.file);
     // console.log(this.templateEndpoints);
     // console.log(this.templateTimeLine);
     // console.log(this.strText);
